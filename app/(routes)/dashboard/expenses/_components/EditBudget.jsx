@@ -87,7 +87,7 @@ function EditBudget({budgetInfo,refreshData}) {
                             <Input
                             type="number"
                             defaultValue={budgetInfo?.amount}
-                            placeholder="e.g. 5000$"
+                            placeholder="e.g. ₹5000"
                             onChange={(e)=>setAmount(e.target.value)} />
                         </div>
 
