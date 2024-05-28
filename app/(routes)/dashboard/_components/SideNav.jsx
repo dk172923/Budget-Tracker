@@ -42,7 +42,8 @@ function SideNav() {
         <div className='mt-5'>
             {menuList.map((menu,index)=>(
                 <Link href={menu.path} key={index}>
-                    <h2 className={`flex gap-2 items-center
+                    <h2 id={menu.name} name={menu.name.toLowerCase()}
+                    className={`flex gap-2 items-center
                     text-gray-500 font-medium
                     mb-2
                     p-5 cursor-pointer rounded-md
@@ -57,7 +58,7 @@ function SideNav() {
         </div>
             <div className='fixed bottom-10 p-5 flex gap-2
             items-center'>
-                <UserButton/>
+                <UserButton afterSignOutUrl='/'/>
                 Profile
             </div>
     </div>

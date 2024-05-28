@@ -99,7 +99,7 @@ function ExpensesScreen({params}) {
         
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button className="flex gap-2" variant="destructive"> 
+              <Button className="flex gap-2" variant="destructive" name="delete_budget"> 
             <Trash/> Delete</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
@@ -112,7 +112,7 @@ function ExpensesScreen({params}) {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={()=>deleteBudget()}>Continue</AlertDialogAction>
+                <AlertDialogAction onClick={()=>deleteBudget()} name="delete_budget_confirmation_btn">Continue</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>

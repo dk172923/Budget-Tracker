@@ -25,7 +25,7 @@ function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a
+            <a id='getStartedBtn'
               className="block w-full rounded bg-primary px-12 py-3
                text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
               href={getStartedLink}

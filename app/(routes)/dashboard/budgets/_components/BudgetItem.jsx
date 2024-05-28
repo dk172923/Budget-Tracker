@@ -19,7 +19,7 @@ function BudgetItem({budget}) {
               bg-slate-100 rounded-full 
               '>{budget?.icon}</h2>
               <div>
-                  <h2 className='font-bold'>{budget.name}</h2>
+                  <h2 className='font-bold' id={budget.name}>{budget.name}</h2>
                   <h2 className='text-sm text-gray-500'>{budget.totalItem} Item</h2>
               </div>
               

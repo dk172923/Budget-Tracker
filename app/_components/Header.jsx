@@ -22,12 +22,12 @@ function Header() {
       />
       <div className='flex gap-3 items-center'>
         <Link href={'/dashboard'}>
-          <Button variant="outline">Dashboard</Button>
+          <Button variant="outline" name="dashboard">Dashboard</Button>
         </Link>
         <Link href={getStartedLink}>
-          <Button>Get Started</Button>
+          <Button id='getStartedBtnHeader'>Get Started</Button>
         </Link>
-        {isSignedIn && <UserButton />}
+        {isSignedIn && <UserButton afterSignOutUrl='/'/>}
       </div>
     </div>
   )
