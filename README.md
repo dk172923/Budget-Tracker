@@ -23,7 +23,7 @@ The video shows the full TestNG suite signing in, creating a budget, adding, del
      and delete the fallback link below.
 -->
 
-### 🎬 Test Execution Demo
+### Test Execution Demo
 
 https://github.com/user-attachments/assets/24686348-4264-436d-a821-a62815bb869f
 
