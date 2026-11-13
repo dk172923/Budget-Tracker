@@ -46,3 +46,6 @@ graphify-out/
 # Maven / TestNG output
 testing/selenium-testng/target/
 testing/selenium-testng/test-output/
+
+# clerk configuration (can include secrets)
+/.clerk/
