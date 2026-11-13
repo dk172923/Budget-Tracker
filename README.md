@@ -23,9 +23,11 @@ The video shows the full TestNG suite signing in, creating a budget, adding, del
      and delete the fallback link below.
 -->
 
-▶️ [Watch the test run (MP4)](<testing/Budget Tracker Website Testing using TestNG.mp4>)
+### 🎬 Test Execution Demo
 
-Test cases, how to run the suite, and the TestNG project are in [`testing/README.md`](testing/README.md).
+https://github.com/user-attachments/assets/24686348-4264-436d-a821-a62815bb869f
+
+Test cases, execution instructions, and the complete TestNG project are available in [testing/README.md](testing/README.md).
 
 ## Tech stack
 
