@@ -24,7 +24,7 @@ function ExpenseListTable({expensesList,refreshData}) {
             <h2 className='font-bold'>Action</h2>
         </div>
         {expensesList.map((expenses,index)=>(
-             <div className='grid grid-cols-4 bg-slate-50 p-2'>
+             <div key={expenses.id ?? index} className='grid grid-cols-4 bg-slate-50 p-2'>
              <h2>{expenses.name}</h2>
              <h2>{expenses.amount}</h2>
              <h2>{expenses.createdAt}</h2>

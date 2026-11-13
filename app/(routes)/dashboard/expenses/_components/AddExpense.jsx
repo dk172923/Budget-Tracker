@@ -7,8 +7,8 @@ import { toast } from 'sonner';
 
 function AddExpense({ budgetId, user, refreshData }) {
 
-    const [name, setName] = useState();
-    const [amount, setAmount] = useState();
+    const [name, setName] = useState('');
+    const [amount, setAmount] = useState('');
     const [loading, setLoading] = useState(false);
     /**
      * Used to Add New Expense

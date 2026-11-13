@@ -51,8 +51,8 @@ function CreateBudget({refreshData}) {
             <DialogContent>
                 <DialogHeader>
                 <DialogTitle>Create New Budget</DialogTitle>
-                <DialogDescription>
-                    <div className='mt-5'>
+                <DialogDescription asChild>
+                    <div className="mt-5">
                         <Button variant="outline" id="emoji_picker_btn"
 
                         className="text-lg"

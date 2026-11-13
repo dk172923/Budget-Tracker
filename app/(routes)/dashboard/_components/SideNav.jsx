@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Image from "next/image";
 import {LayoutGrid,PiggyBank,ReceiptText,ShieldCheck} from 'lucide-react'
 import { UserButton } from '@clerk/nextjs';
@@ -29,15 +29,13 @@ function SideNav() {
     ]
     const path=usePathname();
 
-    useEffect(()=>{
-        console.log(path)
-    },[path])
   return (
     <div className='h-screen p-5 border shadow-sm'>
         <Image src={'/budget-tracker.png'}
         alt='logo'
         width={95}
         height={50}
+        style={{ height: "auto" }}
         />
         <div className='mt-5'>
             {menuList.map((menu,index)=>(

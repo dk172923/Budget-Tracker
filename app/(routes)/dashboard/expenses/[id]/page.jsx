@@ -19,10 +19,11 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import EditBudget from '../_components/EditBudget';
 
-function ExpensesScreen({params}) {
+function ExpensesScreen() {
+    const params=useParams();
     const {user}=useUser();
     const [budgetInfo,setbudgetInfo]=useState();
     const [expensesList,setExpensesList]=useState([]);
