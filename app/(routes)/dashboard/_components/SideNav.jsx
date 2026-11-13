@@ -58,7 +58,7 @@ function SideNav() {
         </div>
             <div className='fixed bottom-10 p-5 flex gap-2
             items-center'>
-                <UserButton afterSignOutUrl='/'/>
+                <UserButton/>
                 Profile
             </div>
     </div>

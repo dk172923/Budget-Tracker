@@ -27,7 +27,7 @@ function Header() {
         <Link href={getStartedLink}>
           <Button id='getStartedBtnHeader'>Get Started</Button>
         </Link>
-        {isSignedIn && <UserButton afterSignOutUrl='/'/>}
+        {isSignedIn && <UserButton/>}
       </div>
     </div>
   )

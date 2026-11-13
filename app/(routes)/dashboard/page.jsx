@@ -2,13 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import { UserButton, useUser } from "@clerk/nextjs";
 import CardInfo from './_components/CardInfo';
-import { db } from '@/utils/dbConfig';
-import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
-import { Budgets, Expenses } from '@/utils/schema';
+import { getBudgetList as fetchBudgetList, getAllExpenses as fetchAllExpenses } from '@/utils/actions';
 import BarChartDashboard from './_components/BarChartDashboard';
 import BudgetItem from './budgets/_components/BudgetItem';
 import ExpenseListTable from './expenses/_components/ExpenseListTable';
-import Head from 'next/head';
 function Dashboard() {
   const {user}=useUser();
 
@@ -21,17 +18,7 @@ function Dashboard() {
    * used to get budget List
    */
   const getBudgetList=async()=>{
-    const result=await db.select({
-      ...getTableColumns(Budgets),
-      
-      totalSpend:sql `sum(${Expenses.amount})`.mapWith(Number),
-      totalItem: sql `count(${Expenses.id})`.mapWith(Number)
-    }).from(Budgets)
-    .leftJoin(Expenses,eq(Budgets.id,Expenses.budgetId))
-    .where(eq(Budgets.createdBy,user?.primaryEmailAddress?.emailAddress))
-    .groupBy(Budgets.id)
-    .orderBy(desc(Budgets.id))
-    ;
+    const result=await fetchBudgetList();
 
     setBudgetList(result);
     getAllExpenses();
@@ -42,22 +29,14 @@ function Dashboard() {
    * Used to get All expenses belong to users
    */
   const getAllExpenses=async()=>{
-    const result=await db.select({
-      id:Expenses.id,
-      name:Expenses.name,
-      amount:Expenses.amount,
-      createdAt:Expenses.createdAt
-    }).from(Budgets)
-    .rightJoin(Expenses,eq(Budgets.id,Expenses.budgetId))
-    .where(eq(Budgets.createdBy,user?.primaryEmailAddress.emailAddress))
-    .orderBy(desc(Expenses.id));
+    const result=await fetchAllExpenses();
     setExpensesList(result);
-   
+
   }
 
   return (
     <div className='p-8'>
-        <h2 className='font-bold text-4xl'>Hi, {user?.fullName} ✌️</h2> 
+        <h2 className='font-bold text-4xl'>Hi, {user?.fullName} ✌️</h2>
         <p className='text-gray-500'>Here's what happenning with your money, Lets Manage your expense</p>
 
         <CardInfo budgetList={budgetList} />
@@ -66,7 +45,7 @@ function Dashboard() {
             <BarChartDashboard
               budgetList={budgetList}
             />
-          
+
           <ExpenseListTable
           expensesList={expensesList}
           refreshData={()=>getBudgetList()}
@@ -74,11 +53,6 @@ function Dashboard() {
 
           </div>
           <div className='grid gap-5'>
-            <div>
-              <Head>
-              <script type='text/javascript' src='//pl23123991.profitablegatecpm.com/59/4a/39/594a3977a9246b4cb699f531c6dfb86f.js'></script>
-              </Head>
-            </div>
             <h2 className='font-bold text-lg'>Latest Budgets</h2>
               {budgetList?.length>0?budgetList.map((budget,index)=>(
                 <BudgetItem budget={budget} key={index} />
@@ -89,7 +63,7 @@ function Dashboard() {
                  bg-slate-200 rounded-lg animate-pulse'>
                 </div>
               ))
-              
+
             }
           </div>
         </div>

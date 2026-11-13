@@ -8,7 +8,7 @@ function DashboardHeader() {
           
         </div>
         <div>
-            <UserButton afterSignOutUrl='/'/>
+            <UserButton/>
         </div>
        
     </div>

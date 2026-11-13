@@ -32,3 +32,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# env files (keep .env.example)
+.env
+.env*.local
+!.env.example
+
+# drizzle-kit output
+/drizzle
+
+# graphify knowledge graph (local only)
+graphify-out/
+
+# Maven / TestNG output
+testing/selenium-testng/target/
+testing/selenium-testng/test-output/

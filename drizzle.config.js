@@ -1,10 +1,14 @@
-import { PgDialect } from "drizzle-orm/pg-core";
+import { config } from "dotenv";
+import { defineConfig } from "drizzle-kit";
 
-export default {
+// drizzle-kit runs outside Next.js, so load .env.local ourselves.
+config({ path: ".env.local" });
+
+export default defineConfig({
   schema: "./utils/schema.jsx",
-  driver: 'pg',
-  dialect: 'postgresql',
+  out: "./drizzle",
+  dialect: "postgresql",
   dbCredentials: {
-    url: process.env.NEXT_PUBLIC_DATABASE_URL,
-  }
-};
+    url: process.env.DATABASE_URL,
+  },
+});

@@ -1,7 +1,5 @@
 "use client"
-import { db } from '@/utils/dbConfig';
-import { Budgets, Expenses } from '@/utils/schema';
-import { desc, eq } from 'drizzle-orm';
+import { getAllExpenses as fetchAllExpenses } from '@/utils/actions';
 import React, { useEffect, useState } from 'react'
 import ExpenseListTable from './_components/ExpenseListTable';
 import { useUser } from '@clerk/nextjs';
@@ -18,17 +16,9 @@ function ExpensesScreen() {
    * Used to get All expenses belong to users
    */
   const getAllExpenses=async()=>{
-    const result=await db.select({
-      id:Expenses.id,
-      name:Expenses.name,
-      amount:Expenses.amount,
-      createdAt:Expenses.createdAt
-    }).from(Budgets)
-    .rightJoin(Expenses,eq(Budgets.id,Expenses.budgetId))
-    .where(eq(Budgets.createdBy,user?.primaryEmailAddress.emailAddress))
-    .orderBy(desc(Expenses.id));
+    const result=await fetchAllExpenses();
     setExpensesList(result);
-   
+
   }
   return (
     <div className='p-10'>

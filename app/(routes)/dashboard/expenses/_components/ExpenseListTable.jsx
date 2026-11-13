@@ -1,6 +1,4 @@
-import { db } from '@/utils/dbConfig'
-import { Expenses } from '@/utils/schema'
-import { eq } from 'drizzle-orm'
+import { deleteExpense as removeExpense } from '@/utils/actions'
 import { Trash } from 'lucide-react'
 import React from 'react'
 import { toast } from 'sonner'
@@ -8,9 +6,7 @@ import { toast } from 'sonner'
 function ExpenseListTable({expensesList,refreshData}) {
 
   const deleteExpense=async(expense)=>{
-    const result=await db.delete(Expenses)
-    .where(eq(Expenses.id,expense.id))
-    .returning();
+    const result=await removeExpense(expense.id);
 
     if(result)
     {

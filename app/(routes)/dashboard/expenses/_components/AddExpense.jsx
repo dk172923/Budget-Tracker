@@ -1,9 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { db } from '@/utils/dbConfig';
-import { Budgets, Expenses } from '@/utils/schema';
+import { addExpense } from '@/utils/actions';
 import { Loader } from 'lucide-react';
-import moment from 'moment';
 import React, { useState } from 'react'
 import { toast } from 'sonner';
 
@@ -17,12 +15,7 @@ function AddExpense({ budgetId, user, refreshData }) {
      */
     const addNewExpense = async () => {
         setLoading(true)
-        const result = await db.insert(Expenses).values({
-            name: name,
-            amount: amount,
-            budgetId: budgetId,
-            createdAt: moment().format('DD/MM/yyy')
-        }).returning({ insertedId: Budgets.id });
+        const result = await addExpense(budgetId, { name, amount });
 
         setAmount('');
         setName('');
