@@ -2,7 +2,7 @@
 
 A personal budget and expense tracker built with Next.js 14, Clerk, Drizzle ORM and Neon Postgres. We used it as the application under test for the **Software Testing Hackathon by Ingage Technologies**, where our team automated its main user flows with **Selenium and TestNG**.
 
-![Budget Tracker dashboard](public/dashboard.png)
+![Budget Tracker dashboard](public/home-page-img.png)
 
 ## Credits
 
