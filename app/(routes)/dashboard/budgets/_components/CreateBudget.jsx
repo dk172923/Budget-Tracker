@@ -13,11 +13,9 @@ import {
 import EmojiPicker from 'emoji-picker-react'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { db } from '@/utils/dbConfig';
-import { Budgets } from '@/utils/schema';
-import { useUser } from '@clerk/nextjs';
+import { createBudget } from '@/utils/actions';
 import { toast } from 'sonner';
-  
+
 function CreateBudget({refreshData}) {
 
     const [emojiIcon,setEmojiIcon]=useState('😀');
@@ -26,19 +24,11 @@ function CreateBudget({refreshData}) {
     const [name,setName]=useState();
     const [amount,setAmount]=useState();
 
-    const {user}=useUser();
-
     /**
      * Used to Create New Budget
      */
     const onCreateBudget=async()=>{
-        const result=await db.insert(Budgets)
-        .values({
-            name:name,
-            amount:amount,
-            createdBy:user?.primaryEmailAddress?.emailAddress,
-            icon:emojiIcon
-        }).returning({insertedId:Budgets.id})
+        const result=await createBudget({name,amount,icon:emojiIcon})
 
         if(result)
         {
@@ -48,7 +38,7 @@ function CreateBudget({refreshData}) {
     }
   return (
     <div>
-       
+
         <Dialog>
             <DialogTrigger asChild>
                 <div className='bg-slate-100 p-10 rounded-md
@@ -61,10 +51,10 @@ function CreateBudget({refreshData}) {
             <DialogContent>
                 <DialogHeader>
                 <DialogTitle>Create New Budget</DialogTitle>
-                <DialogDescription>
-                    <div className='mt-5'>
+                <DialogDescription asChild>
+                    <div className="mt-5">
                         <Button variant="outline" id="emoji_picker_btn"
-                       
+
                         className="text-lg"
                         onClick={()=>setOpenEmojiPicker(!openEmojiPicker)}
                         >{emojiIcon}</Button>
@@ -90,13 +80,13 @@ function CreateBudget({refreshData}) {
                             onChange={(e)=>setAmount(e.target.value)} />
                         </div>
 
-                      
+
                     </div>
                 </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
-                    <Button 
+                    <Button
                             disabled={!(name&&amount)}
                             onClick={()=>onCreateBudget()}
                         className="mt-5 w-full" name="create-budget-btn">Create Budget</Button>

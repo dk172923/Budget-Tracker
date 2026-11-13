@@ -10,7 +10,6 @@ function CardInfo({budgetList}) {
         budgetList&&CalculateCardInfo();
     },[budgetList])
     const CalculateCardInfo=()=>{
-        console.log(budgetList);
         let totalBudget_=0;
         let totalSpend_=0;
 
@@ -21,7 +20,6 @@ function CardInfo({budgetList}) {
 
             setTotalBudget(totalBudget_);
             setTotalSpend(totalSpend_);
-        console.log(totalBudget_,totalSpend_)
     }
   return (
     <div>
@@ -56,7 +54,7 @@ function CardInfo({budgetList}) {
     :
     <div className='mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
        { [1,2,3].map((item,index)=>(
-            <div className='h-[110px] w-full bg-slate-200 animate-pulse rounded-lg'>
+            <div key={index} className='h-[110px] w-full bg-slate-200 animate-pulse rounded-lg'>
                 
             </div>
     ))}

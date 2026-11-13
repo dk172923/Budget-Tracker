@@ -13,11 +13,8 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import EmojiPicker from 'emoji-picker-react'
-import { useUser } from '@clerk/nextjs'
 import { Input } from '@/components/ui/input'
-import { db } from '@/utils/dbConfig'
-import { Budgets } from '@/utils/schema'
-import { eq } from 'drizzle-orm'
+import { updateBudget } from '@/utils/actions'
 import { toast } from 'sonner'
 function EditBudget({budgetInfo,refreshData}) {
     const [emojiIcon,setEmojiIcon]=useState(budgetInfo?.icon);
@@ -25,8 +22,6 @@ function EditBudget({budgetInfo,refreshData}) {
 
     const [name,setName]=useState();
     const [amount,setAmount]=useState();
-
-    const {user}=useUser();
 
     useEffect(()=>{
         if(budgetInfo)
@@ -38,12 +33,7 @@ function EditBudget({budgetInfo,refreshData}) {
         }
     },[budgetInfo])
     const onUpdateBudget=async()=>{
-        const result=await db.update(Budgets).set({
-            name:name,
-            amount:amount,
-            icon:emojiIcon,
-        }).where(eq(Budgets.id,budgetInfo.id))
-        .returning();
+        const result=await updateBudget(budgetInfo.id,{name,amount,icon:emojiIcon});
 
         if(result)
         {
@@ -60,10 +50,10 @@ function EditBudget({budgetInfo,refreshData}) {
             <DialogContent>
                 <DialogHeader>
                 <DialogTitle>Update Budget</DialogTitle>
-                <DialogDescription>
-                    <div className='mt-5'>
+                <DialogDescription asChild>
+                    <div className="mt-5">
                         <Button variant="outline" id="emoji_picker_btn"
-                       
+
                         className="text-lg"
                         onClick={()=>setOpenEmojiPicker(!openEmojiPicker)}
                         >{emojiIcon}</Button>
@@ -91,13 +81,13 @@ function EditBudget({budgetInfo,refreshData}) {
                             onChange={(e)=>setAmount(e.target.value)} />
                         </div>
 
-                      
+
                     </div>
                 </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
-                    <Button 
+                    <Button
                             disabled={!(name&&amount)}
                             onClick={()=>onUpdateBudget()}
                         className="mt-5 w-full" name="update-budget-btn">Update Budget</Button>

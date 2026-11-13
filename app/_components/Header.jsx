@@ -15,10 +15,12 @@ function Header() {
   
   return (
     <div className='p-3 flex justify-between items-center border shadow-sm'>
-      <Image src={'./budget-tracker.png'}
+      <Image src={'/budget-tracker.png'}
              alt='logo'
              width={95}
              height={50}
+             style={{ height: "auto" }}
+             priority
       />
       <div className='flex gap-3 items-center'>
         <Link href={'/dashboard'}>
@@ -27,7 +29,7 @@ function Header() {
         <Link href={getStartedLink}>
           <Button id='getStartedBtnHeader'>Get Started</Button>
         </Link>
-        {isSignedIn && <UserButton afterSignOutUrl='/'/>}
+        {isSignedIn && <UserButton/>}
       </div>
     </div>
   )
